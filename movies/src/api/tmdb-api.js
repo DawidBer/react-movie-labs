@@ -29,6 +29,12 @@ export const getMovies = () => {
       .then((res) => res.json())
       .then((json) => json.posters);
   };
+  export const getUpcomingMovies = (id) => {
+    return fetch(`https://api.themoviedb.org/3/movie/${id}/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+     .then((res) => res.json())
+     .then((json) => json.upcoming);
+  };
 
   export const getMovieReviews = (id) => {
     return fetch(
