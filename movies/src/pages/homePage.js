@@ -13,14 +13,14 @@ const MovieListPage = (props) => {
     )
       .then((res) => res.json())
       .then((json) => {
-        // console.log(json);
+         console.log(json);
         return json.results;
       })
       .then((movies) => {
         setMovies(movies);
       });
   }, []);
-  
+
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
 
@@ -33,6 +33,13 @@ const MovieListPage = (props) => {
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
     });
+
+    const addToFavorites = (movieId) => {
+      const updatedMovies = movies.map((m) =>
+        m.id === movieId ? { ...m, favorite: true } : m
+      );
+      setMovies(updatedMovies);
+    };
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
@@ -52,7 +59,7 @@ const MovieListPage = (props) => {
       genreFilter={genreFilter}
     />
         </Grid>
-        <MovieList movies={displayedMovies} />
+        <MovieList movies={displayedMovies} selectFavorite={addToFavorites} />
       </Grid>
     </Grid>
   );
