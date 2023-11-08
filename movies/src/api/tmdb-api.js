@@ -61,6 +61,7 @@ export const getMovie = (args) => {
       throw error
    });
   };
+  
   export const getUpcomingMovies = (id) => {
     return fetch(`https://api.themoviedb.org/3/movie/${id}/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}`
     )
