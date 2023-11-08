@@ -22,18 +22,19 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <BrowserRouter>
-
-      <SiteHeader/>
-
-      <Routes>
-        <Route exact path="/movies/favorites" element={<FavoriteMoviesPage />} />
-        <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-        <Route path="/movies/:id" element={<MoviePage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={ <Navigate to="/" /> } />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <SiteHeader />
+        <Routes>
+          <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+          <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+          <Route path="/movies/:id" element={<MoviePage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={ <Navigate to="/" /> } />
+        </Routes>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 
